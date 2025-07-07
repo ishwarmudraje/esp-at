@@ -166,6 +166,9 @@ def at_patch_if_config(platform, module):
     else:
         ESP_LOGE('patches update check has failed.')
 
+def install_tools():
+    subprocess.call("esp-idf/install.sh")
+
 def build_project(platform_name, module_name, silence, build_args):
     if platform_name == 'ESP32':
         idf_target = 'esp32'
@@ -388,6 +391,8 @@ def main():
 
     # apply possible patches to source code
     at_patch_if_config(platform_name, module_name)
+
+    install_tools()
 
     build_project(platform_name, module_name, silence, build_args)
 
